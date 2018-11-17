@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         蜘蛛磁力搜索
 // @namespace    https://zizhucili.com
-// @version      0.0.1
+// @version      0.0.2
 // @description  搜索想看的视频,书籍,软件的磁力链接,方便,节省时间
 // @author       Fructose
 // @match        *://*/*
 // @grant        GM_addStyle
 // @require      https://code.jquery.com/jquery-3.1.0.js
+// @license      MIT
+// @icon         https://cdn-img.easyicon.net/png/376/37643.gif
 // ==/UserScript==
 
 (function() {
@@ -21,7 +23,6 @@
     document.body.appendChild(odom);
     document.querySelector("#zizhuMain").addEventListener("click",searchSetting);
     function searchSetting(){
-       console.log('click',txt)
        location.href="https://zizhucili.com/s/"+txt
     }
     $('body').mouseup(function(e){
@@ -29,10 +30,12 @@
         let sel = window.getSelection()
         var range = sel.getRangeAt(0);
         var rect = range.getBoundingClientRect();
+        var scrollH = $(document).scrollTop();
+        var scrollW = $(document).scrollLeft();
         if(txt){
-            $('#zizhuMain').css({ "top": rect.y+24+'px', "left": rect.x+'px','opacity':1,'width':'36px','height':'36px' })
+            $('#zizhuMain').css({ "top": rect.y+scrollH+24+'px', "left": rect.x+scrollW+'px','opacity':1,'width':'36px','height':'36px' })
         } else {
-            $('#zizhuMain').css({'opacity':0 ,'width:':'0','height':'0' })
+            $('#zizhuMain').css({'opacity':0 ,'width':'0','height':'0' })
         }
     })
 })();
